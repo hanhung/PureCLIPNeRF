@@ -45,7 +45,7 @@ table td:nth-of-type(4) {
 <h1 id="understanding-pure-clip-guidance-for-voxel-grid-nerf-models"><center>Understanding Pure CLIP Guidance for Voxel Grid NeRF Models</center></h1>
 
 <center>
-<a href="./">
+<a href="https://github.com/hanhung/PureCLIPNeRF">
     <img alt="Github" src="./assets/images/github.png" width="45" height="45" />
 </a>
 <a href="./">
@@ -73,7 +73,7 @@ table td:nth-of-type(4) {
 <p>In this paper, we explore the task of text to 3D object generation using CLIP. Specifically, we use CLIP for guidance without access to any datasets, a setting we refer to as pure CLIP guidance. While prior work has adopted this setting, there is no systematic empirical study of mechanics for preventing adversarial generations within CLIP. We use neural radiance fields with explicit density and color grids to exacerbate this problem as the parameter space is larger than coordinate-based MLPs. Thus, we illustrate how different image-based augmentations prevent the adversarial generation problem, and how the generated results are impacted. We test different CLIP model architectures and show that ensembling different models for guidance can prevent adversarial generations within bigger models and generate sharper results. Furthermore, we implement an implicit voxel grid model to show how neural networks provide an additional layer of regularization, resulting in better geometrical structure and coherency of generated objects. Compared to prior work, we achieve more coherent results with higher memory efficiency and faster training speeds.</p>
 
 <h3 id="model"><center>Model</center></h3>
-<center><img src="/assets/images/Fig-Model.png" width="1000" /></center>
+<center><img src="./assets/images/Fig-Model.png" width="1000" /></center>
 
 <h3 id="results-with-different-guidance-models"><center>Results with Different Guidance Models</center></h3>
 <table style="width:100%">
