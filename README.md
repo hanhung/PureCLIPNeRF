@@ -66,6 +66,24 @@ clip_mode_res = 240,
 open_clip = True,
 open_clip_pretrained = 'laion400m_e32',
 ```
+### Ensemble Models
+1. To ensemble CLIP models, enter the clip model name and set the image resolution of the CLIP model in the second slot.
+```
+clip_model_name = 'ViT-B/32',
+clip_mode_res = 224,
+clip_model_start = 0,
+clip_model_end = 40000,
+open_clip = False,
+open_clip_pretrained = None,
+
+clip_model_name_2 = 'ViT-L/14',
+clip_model_weight_2 = 0.5,
+clip_mode_res_2 = 224,
+clip_model_start_2 = 5000,
+clip_model_end_2 = 40000,
+open_clip_2 = False,
+open_clip_pretrained_2 = None,
+```
 
 ## Acknowledgements
 [**DVGO**](https://github.com/sunset1995/DirectVoxGO): Our backbones are heavily based on DVGO and their implementation.
@@ -80,7 +98,7 @@ Thanks to the authors for the awesome works above and releasing their code! Plea
 
 ## TO-DO
 - [X] Add remaining paper configs.
-- [ ] Add more OpenCLIP configs.
+- [X] Add more OpenCLIP configs.
 - [ ] Add section about tuning voxel grid resolution and scheduling.
 - [ ] Add figures showing difference between low, mid and high.
 - [ ] Mask unneeded forward passes for implicit model.
