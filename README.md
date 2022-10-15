@@ -40,8 +40,8 @@ $ pip install open_clip_torch
 
 ## Training
 ```
-$ python run.py --config configs/low/exp_vit16.py --prompt "steampunk city; trending on artstation."
 $ python run.py --config configs/low/imp_vit16.py --prompt "steampunk city; trending on artstation."
+$ python run.py --config configs/low/exp_vit16.py --prompt "steampunk city; trending on artstation."
 ```
 ### Config File Naming
 * exp_\*.py, imp_\*.py: Explicit and Implicit voxel grid models respectively.
