@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-expname = 'high_imp_vit16'        # experiment name
+expname = 'paper_exp_vit32'       # experiment name
 basedir = './logs/'               # where to store ckpts and logs
 
 ''' Template of data options
@@ -31,7 +31,7 @@ data = dict(
     resolution=224,               # Training time render resolution
     render_resolution=512,        # Render resolution at inference time
 
-    num_diffs=4,                  # Number of Diff Augmentations to apply
+    num_diffs=8,                  # Number of Diff Augmentations to apply
     num_bkgds=8,                  # Number of Background Augmentations to apply
 
     batch_size=1,                 # Number of images rendered ber optimization iteration
@@ -44,14 +44,13 @@ data = dict(
 Fixed base train settings
 '''
 base_train = dict(
-    mode='implicit',              # Whether to use implicit or explicit voxel grid
+    mode='explicit',              # Whether to use implicit or explicit voxel grid
 
     N_rand=8192,                  # batch size (number of random rays per optimization step)
 
-    lrate_density=0.0,            # lr of density voxel grid
-    lrate_k0=0.0,                 # lr of color/feature voxel grid
-    lrate_rgbnet=5e-3,            # lr of the mlp to preduct view-dependent color
-    lrate_densitynet=5e-3,        # lr of the mlp to preduct view-dependent color
+    lrate_density=1e-1,           # lr of density voxel grid
+    lrate_k0=1e-1,                # lr of color/feature voxel grid
+    lrate_rgbnet=1e-3,            # lr of the mlp to preduct view-dependent color
     lrate_decay=20,               # lr decay by 0.1 after every lrate_decay*1000 steps
 
     pervoxel_lr=False,            # view-count-based lr
@@ -85,18 +84,18 @@ fine_train.update(dict(
     tv_after=5000,                # count total variation loss from tv_from step
     tv_before=13000,              # count total variation before the given number of iterations
     tv_dense_before=0,            # count total variation densely before the given number of iterations
-    weight_tv_density=0.2,        # weight of total variation loss of density voxel grid
-    weight_tv_k0=0.2,             # weight of total variation loss of color/feature voxel grid
+    weight_tv_density=0.1,        # weight of total variation loss of density voxel grid
+    weight_tv_k0=0.1,             # weight of total variation loss of color/feature voxel grid
 
     prior_after = 0,              # Iteration to start adding kl loss
     prior_before = 8000,          # Iteration to stop adding kl loss
-    prior_loss_weight = 0.2,      # Lambda weight for kl loss
+    prior_loss_weight = 0.05,     # Lambda weight for kl loss
 
-    persp_aug = False,            # Whether to turn on perspective augmentation
+    persp_aug = True,             # Whether to turn on perspective augmentation
     persp_p = 1.0,                # Probability for random perspective
     persp_distortion_scale = 0.6, # Distortion rate for random perspective
 
-    clip_model_name = 'ViT-B/16', # ['RN50', 'RN101', 'RN50x4', 'RN50x16', 'RN50x64', 'ViT-B/32', 'ViT-B/16', 'ViT-L/14', 'ViT-L/14@336px']
+    clip_model_name = 'ViT-B/32', # ['RN50', 'RN101', 'RN50x4', 'RN50x16', 'RN50x64', 'ViT-B/32', 'ViT-B/16', 'ViT-L/14', 'ViT-L/14@336px']
     clip_mode_res = 224,
     clip_model_start = 0,
     clip_model_end = 40000,
@@ -131,7 +130,7 @@ base_model_and_render = dict(
     rgbnet_width=128,             # width of the colors MLP
     alpha_init=1e-6,              # set the alpha values everywhere at the begin of training
     fast_color_thres=1e-7,        # threshold of alpha value to skip the fine stage sampled point
-    maskout_near_cam_vox=False,   # maskout grid points that between cameras and their near planes
+    maskout_near_cam_vox=True,    # maskout grid points that between cameras and their near planes
     world_bound_scale=1,          # rescale the BBox enclosing the scene
     stepsize=0.5,                 # sampling stepsize in volume rendering
 )
@@ -140,7 +139,6 @@ fine_model_and_render = deepcopy(base_model_and_render)
 fine_model_and_render.update(dict(
     num_voxels=160**3,
     num_voxels_base=160**3,
-    activation='relu',
 ))
 
 del deepcopy

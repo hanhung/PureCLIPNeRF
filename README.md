@@ -50,7 +50,7 @@ $ python run.py --config configs/low/imp_vit16.py --prompt "matte painting of a 
 ### Config File Folders
 * configs/low/\*: Settings that will run on GPUs with at least 11GB of VRAM. (tested on RTX 2080 Ti)
 * configs/mid/\*: Settings that will run on GPUs with at least 24GB of VRAM. (tested on RTX 3090)
-* configs/high/\*: Settings used in the paper. (tested on RTX A6000)
+* configs/paper/\*: Settings used in the paper. (tested on RTX A6000)
 
 ## Config File
 ### Guidance Models
@@ -79,7 +79,7 @@ open_clip_pretrained = 'laion400m_e32',
 Thanks to the authors for the awesome works above and releasing their code! Please check out their papers for more details.
 
 ## TO-DO
-- [ ] Add remaining paper configs.
+- [X] Add remaining paper configs.
 - [ ] Add more OpenCLIP configs.
 - [ ] Add section about tuning voxel grid resolution and scheduling.
 - [ ] Add figures showing difference between low, mid and high.
